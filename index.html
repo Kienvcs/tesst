@@ -4,20 +4,10 @@
     <title>Audio Player</title>
 </head>
 <body>
-    <audio id="myAudio" src="./nhac.mp3"></audio>
+    <audio controls> 
+  <source src="nhac.mp3" type="audio/mpeg">
+  Trình duyệt của bạn không hỗ trợ thẻ audio.
+</audio>
 
-    <script>
-        const audio = document.getElementById("myAudio");
-
-        audio.addEventListener('error', (event) => {
-            console.error("An error occurred while loading the audio:", event.error);
-        });
-
-        audio.addEventListener('canplaythrough', () => {
-            console.log("Audio loaded and ready to play");
-            // You can now safely play the audio
-            audio.play(); 
-        });
-    </script>
 </body>
 </html>
