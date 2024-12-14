@@ -1,39 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-#countdown {
-  font-size: 24px;
-  text-align: center;
-}
-</style>
+  <style>
+    #countdown {
+      font-size: 24px;
+      text-align: center;
+      display: none; 
+    }
+
+    #playButton { 
+      display: none; 
+    }
+
+    #startButton {
+      display: block;
+      font-size: 18px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
-<div id="countdown">2</div>
-<audio id="myAudio" src="./nhac.mp3"></audio>
-<button id="playButton" style="display: none;">Play Music</button>
+  <div id="countdown">2</div>
+  <audio id="myAudio" src="./nhac.mp3"></audio>
+  <button id="playButton">Play Music</button>
 
-<script>
-  var count = 2;
-  var countdown = setInterval(function() {
-    document.getElementById("countdown").innerHTML = count;
-    count--;
-    if (count < 0) {
-      clearInterval(countdown);
-      document.getElementById("countdown").innerHTML = "Play!";
+  <button id="startButton">Bắt đầu trải nghiệm</button>
 
-      // Giả lập sự kiện "click"
-      var playButton = document.getElementById("playButton");
-      playButton.dispatchEvent(new Event('click')); 
+  <script>
+    var count = 2;
+    var countdown; // Khai báo biến countdown ở phạm vi toàn cục
+
+    // Hàm bắt đầu đếm ngược và tự động phát nhạc
+    function startExperience() {
+      countdown = setInterval(function() {
+        document.getElementById("countdown").innerHTML = count;
+        count--;
+        if (count < 0) {
+          clearInterval(countdown);
+          document.getElementById("countdown").innerHTML = "Play!";
+
+          // Thử giả lập sự kiện click
+          var playButton = document.getElementById("playButton");
+          playButton.dispatchEvent(new Event('click')); 
+
+          // Phát nhạc (nếu trình duyệt cho phép)
+          var audio = document.getElementById("myAudio");
+          audio.play(); 
+        }
+      }, 1000);
     }
-  }, 1000);
 
-  document.getElementById("playButton").addEventListener("click", function() {
-    var audio = document.getElementById("myAudio");
-    audio.play();
-  });
-</script>
+    // Gắn sự kiện click vào nút "Bắt đầu trải nghiệm"
+    document.getElementById("startButton").addEventListener("click", function() {
+      this.style.display = 'none'; // Ẩn nút sau khi click
+      startExperience(); // Bắt đầu đếm ngược và phát nhạc
+    });
+
+    // Xử lý sự kiện click cho nút play (ẩn)
+    document.getElementById("playButton").addEventListener("click", function() {
+      var audio = document.getElementById("myAudio");
+      audio.play();
+    });
+  </script>
 
 </body>
 </html>
