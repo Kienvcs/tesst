@@ -4,15 +4,26 @@
   <title>Tự động phát âm thanh</title>
 </head>
 <body>
-  <audio id="myAudio" src="./nhac.mp3" autoplay></audio>
+  <button onclick="playAudio()">Phát nhạc</button>
+
+    <audio id="myAudio" src="your_music.mp3"></audio>
 
     <script>
-        const audio = document.getElementById("myAudio");
-        // Nếu trình duyệt không hỗ trợ autoplay, chúng ta sẽ phát sau 2 giây
-        if (!audio.autoplay) {
-            setTimeout(() => {
-                audio.play();
-            }, 2000); // 2000 mili giây = 2 giây
+        function playAudio() {
+            const audio = document.getElementById("myAudio");
+            // Kiểm tra xem audio có tồn tại không
+            if (audio) {
+                // Kiểm tra xem autoplay có hoạt động không
+                if (!audio.autoplay) {
+                    setTimeout(() => {
+                        audio.play();
+                    }, 2000); // Chờ 2 giây trước khi phát
+                } else {
+                    audio.play();
+                }
+            } else {
+                console.error("Không tìm thấy phần tử audio");
+            }
         }
     </script>
 
