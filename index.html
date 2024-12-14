@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Audio Player</title>
+<style>
+#countdown {
+  font-size: 24px;
+  text-align: center;
+}
+</style>
 </head>
 <body>
+
 <div id="countdown">2</div>
 <audio id="myAudio" src="./nhac.mp3"></audio>
 <button id="playButton" style="display: none;">Play Music</button>
 
 <script>
-  // Hàm đếm ngược
   var count = 2;
   var countdown = setInterval(function() {
     document.getElementById("countdown").innerHTML = count;
@@ -17,16 +22,18 @@
     if (count < 0) {
       clearInterval(countdown);
       document.getElementById("countdown").innerHTML = "Play!";
-      // Tự động click nút play
-      document.getElementById("playButton").click();
+
+      // Giả lập sự kiện "click"
+      var playButton = document.getElementById("playButton");
+      playButton.dispatchEvent(new Event('click')); 
     }
   }, 1000);
 
-  // Hàm chạy nhạc khi nút được click
   document.getElementById("playButton").addEventListener("click", function() {
     var audio = document.getElementById("myAudio");
     audio.play();
   });
 </script>
+
 </body>
 </html>
