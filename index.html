@@ -4,11 +4,17 @@
   <title>Tự động phát âm thanh</title>
 </head>
 <body>
-  <audio autoplay loop hidden muted>
-  <source src="./nhac.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-  </script>
+  <audio id="myAudio" src="./nhac.mp3" autoplay></audio>
+
+    <script>
+        const audio = document.getElementById("myAudio");
+        // Nếu trình duyệt không hỗ trợ autoplay, chúng ta sẽ phát sau 2 giây
+        if (!audio.autoplay) {
+            setTimeout(() => {
+                audio.play();
+            }, 2000); // 2000 mili giây = 2 giây
+        }
+    </script>
 
 </body>
 </html>
