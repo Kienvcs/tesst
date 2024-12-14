@@ -4,10 +4,29 @@
     <title>Audio Player</title>
 </head>
 <body>
-    <audio controls> 
-  <source src="./nhac.mp3" type="audio/mpeg">
-  Trình duyệt của bạn không hỗ trợ thẻ audio.
-</audio>
+<div id="countdown">2</div>
+<audio id="myAudio" src="./nhac.mp3"></audio>
+<button id="playButton" style="display: none;">Play Music</button>
 
+<script>
+  // Hàm đếm ngược
+  var count = 2;
+  var countdown = setInterval(function() {
+    document.getElementById("countdown").innerHTML = count;
+    count--;
+    if (count < 0) {
+      clearInterval(countdown);
+      document.getElementById("countdown").innerHTML = "Play!";
+      // Tự động click nút play
+      document.getElementById("playButton").click();
+    }
+  }, 1000);
+
+  // Hàm chạy nhạc khi nút được click
+  document.getElementById("playButton").addEventListener("click", function() {
+    var audio = document.getElementById("myAudio");
+    audio.play();
+  });
+</script>
 </body>
 </html>
